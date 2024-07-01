@@ -1,0 +1,93 @@
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400');
+
+/* General Styles */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background: #121212;
+    color: #ffffff;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 18px;
+    text-align: center;
+}
+
+.login {
+    max-width: 500px;
+    margin: 5% auto;
+    padding: 20px;
+    background: #1e1e1e;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.login h1 {
+    font-family: 'Pacifico', cursive;
+    color: #ff4081;
+    margin-bottom: 20px;
+}
+
+input, .btn {
+    margin: 10px 0;
+    padding: 10px;
+    width: 100%;
+    border-radius: 5px;
+}
+
+input {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid #333;
+    color: #fff;
+}
+
+input::placeholder {
+    color: #bbb;
+}
+
+.btn {
+    background-color: #ff4081;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: #e91e63;
+}
+
+.comments-container {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+.comments {
+    flex: 1;
+    margin: 0 10px;
+    background: #333;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.comments h2 {
+    font-family: 'Arimo', sans-serif;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.comments table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.comments th, .comments td {
+    padding: 8px;
+    border: 1px solid #555;
+    text-align: left;
+}
+
+.comments th {
+    background-color: #444;
+}

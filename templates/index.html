@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Instagram Sentiment Analyzer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <style>
+    /* Add inline styles for quick preview */
+    body {
+      background: #121212;
+      color: #ffffff;
+      font-family: 'Open Sans', sans-serif;
+    }
+    .login {
+      max-width: 500px;
+      margin: 5% auto;
+      padding: 20px;
+      background: #1e1e1e;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      text-align: center;
+    }
+    .login h1 {
+      font-family: 'Pacifico', cursive;
+      color: rgb(225, 195, 0);
+      margin-bottom: 20px;
+    }
+    input, .btn {
+      margin: 10px 0;
+      padding: 10px;
+      width: 100%;
+      border-radius: 5px;
+    }
+    input {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid #333;
+      color: #fff;
+    }
+    input::placeholder {
+      color: #bbb;
+    }
+    .btn {
+      background-color: rgb(225, 195, 0);
+      border: none;
+      color: rgb(0, 0, 0);
+      cursor: pointer;
+    }
+    .btn:hover {
+      background-color: aqua;
+    }
+    .comments-container {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 20px;
+    }
+    .comments {
+      flex: 1;
+      margin: 0 10px;
+      background: #333;
+      padding: 10px;
+      border-radius: 5px;
+    }
+    .comments h2 {
+      font-family: 'Arimo', sans-serif;
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+    .comments table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .comments th, .comments td {
+      padding: 8px;
+      border: 1px solid #555;
+      text-align: left;
+    }
+    .comments th {
+      background-color: #444;
+    }
+  </style>
+</head>
+
+<body>
+<div class="login">
+  <h1>Instagram Sentiment Analyzer</h1>
+
+  <!-- Main Input For Receiving Query to our ML -->
+  <form action="{{ url_for('predict')}}" method="post">
+    <input type="text" name="short" placeholder="Short code" required="required" />
+    <input type="number" name="number_posts" placeholder="Number of comments" required="required" />
+    <button type="submit" class="btn btn-primary btn-block btn-large">Analyze sentiment</button>
+  </form>
+
+  <br>
+  <br>
+  {% if content %}
+  {{ content.prediction_text }}
+  
+  <div class="comments-container">
+    <div class="comments positive-comments">
+      <h2>Positive Comments</h2>
+      <table>
+        <tbody>
+          {% for comment in content.comments %}
+          {% if comment.predict == 1 %}
+          <tr>
+            <td>{{ comment.text }}</td>
+          </tr>
+          {% endif %}
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    <div class="comments negative-comments">
+      <h2>Negative Comments</h2>
+      <table>
+        <tbody>
+          {% for comment in content.comments %}
+          {% if comment.predict == 0 %}
+          <tr>
+            <td>{{ comment.text }}</td>
+          </tr>
+          {% endif %}
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
+  {% endif %}
+</div>
+</body>
+</html>
